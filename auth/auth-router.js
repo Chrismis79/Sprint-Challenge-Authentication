@@ -47,4 +47,15 @@ router.post('/login', (req, res) => {
     });
 });
 
+function signToken(user){
+  const payload = {
+      username: user.username
+  };
+  const secret = process.env.JWT_SECRET || "keep it secret, keep it safe"
+  const options = {
+      expiresIn: '2hr',
+  }
+  return jwt.sign(payload, secret, options);
+}
+
 module.exports = router;
